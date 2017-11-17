@@ -1,3 +1,4 @@
 # Dependency directories
 webpack-dev-middleware/node_modules/
+webpack-dev-server/node_modules/
 jspm_packages/
