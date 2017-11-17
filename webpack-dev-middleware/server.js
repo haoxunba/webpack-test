@@ -14,7 +14,6 @@ app.use(WebpackDevMiddleware(compiler,{
 }))
 
 app.use(WebpackHotMiddleware(compiler,{
-    path: '/__webpack_hmr',
 }));
 
 app.listen(3000)

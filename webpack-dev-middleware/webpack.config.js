@@ -7,10 +7,7 @@ const webpack = require('webpack');
 module.exports = {
     devtool: 'cheap-module-eval-source-map',
     entry: [
-        // appNew: './src/index.js',
-        
-        // 'webpack/hot/dev-server',
-        'webpack-hot-middleware/client?reload=true', // "only" prevents reload on syntax errors
+        'webpack-hot-middleware/client?reload=true', 
         './src/index' 
     ],
     output: {
@@ -18,19 +15,15 @@ module.exports = {
         path: path.resolve(__dirname, 'dist'),
         publicPath: '/'
     },
-    // devServer: {
-    //     contentBase: './dist',
-    //     hot: true
-    // },
     plugins:[
         new HtmlWebpackPlugin(),
         new webpack.HotModuleReplacementPlugin()
     ],
     module:{
         rules: [
-            {test: /\.js?$/, exclude: /node_modules/, use: ['babel-loader']},
-            {test: /\.css$/, use: ['style-loader', 'css-loader']},
-            {test: /\.(png|svg|jpg|gif)$/, use: ['file-loader']}
+            // {test: /\.js?$/, exclude: /node_modules/, use: ['babel-loader']},
+            // {test: /\.css$/, use: ['style-loader', 'css-loader']},
+            // {test: /\.(png|svg|jpg|gif)$/, use: ['file-loader']}
         ]
     }
 }
