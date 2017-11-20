@@ -4,6 +4,10 @@ import './index.css';
 import icon from './1510887887.jpeg';
 import {square} from './math'
 
+if(process.env.NODE_ENV !== 'production'){
+  console.log('我在开发环境中')
+}
+
 function component() {
   var element = document.createElement('div');
   var btn = document.createElement('button');
