@@ -1,6 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
+import UglifyJSPlugin from 'uglifyjs-webpack-plugin';
 
 module.exports = {
     devtool: 'cheap-module-eval-source-map',
@@ -15,7 +16,8 @@ module.exports = {
     },
     plugins:[
         new HtmlWebpackPlugin(),
-        new webpack.HotModuleReplacementPlugin()
+        new webpack.HotModuleReplacementPlugin(),
+        new UglifyJSPlugin()
     ],
     module:{
         rules: [
