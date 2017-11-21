@@ -1,11 +1,20 @@
-import UglifyJSPlugin from 'uglifyjs-webpack-plugin';
-import merge from 'webpack-merge';
-import common from './webpack.common';
 import webpack from 'webpack';
+import path from 'path';
+import UglifyJSPlugin from 'uglifyjs-webpack-plugin';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
 
-module.exports = merge(common, {
-  devtool: 'source-map',
-  plugins: [
+module.exports = {
+  devtool: 'cheap-module-eval-source-map',
+  entry: [
+    './src/index' 
+  ],
+  output: {
+    filename: 'bundle.js',
+    path: path.resolve(__dirname, 'dist'),
+    publicPath: '/'
+  },
+  plugins:[
+    new HtmlWebpackPlugin(),
     new UglifyJSPlugin({
       sourceMap: true
     }),
@@ -14,5 +23,12 @@ module.exports = merge(common, {
         'NODE_ENV': JSON.stringify('production')
       }
     })
-  ]
-})
+  ],
+  module:{
+    rules: [
+      {test: /\.js?$/, exclude: /node_modules/, use: ['babel-loader']},
+      {test: /\.css$/, use: ['style-loader', 'css-loader']},
+      {test: /\.(png|svg|jpg|gif|jpeg)$/, use: ['file-loader']}
+    ]
+  }
+}

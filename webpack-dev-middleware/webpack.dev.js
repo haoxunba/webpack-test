@@ -1,13 +1,27 @@
 import webpack from 'webpack';
-import merge from 'webpack-merge';
-import common from './webpack.common';
+import path from 'path';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
 
-module.exports = merge(common, {
+module.exports = {
+  devtool: 'cheap-module-eval-source-map',
   entry: [
-    'webpack-hot-middleware/client?reload=true'
+    'webpack-hot-middleware/client?reload=true',    
+    './src/index'
   ],
-  devtool: 'inline-source-map',
-  plugins: [
-    new webpack.HotModuleReplacementPlugin()
-  ]
-})
+  output: {
+    filename: 'bundle.js',
+    path: path.resolve(__dirname, 'dist'),
+    publicPath: '/'
+  },
+  plugins:[
+    new HtmlWebpackPlugin(),
+    new webpack.HotModuleReplacementPlugin()    
+  ],
+  module:{
+    rules: [
+      {test: /\.js?$/, exclude: /node_modules/, use: ['babel-loader']},
+      {test: /\.css$/, use: ['style-loader', 'css-loader']},
+      {test: /\.(png|svg|jpg|gif|jpeg)$/, use: ['file-loader']}
+    ]
+  }
+}
